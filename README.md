@@ -148,6 +148,8 @@ public class IDE {
 				System.out.println(s);
 			}
 			
+			System.out.println("Exit Code: " + process.exitValue()); 
+   			System.exit(process.exitValue());
 			
 		} catch (Exception e) {
 			// TODO: handle exception
