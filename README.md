@@ -113,7 +113,14 @@ public class IDE {
 			while((s = stdError.readLine()) != null) {
 				System.out.println(s);
 			}
-			
+
+			int exitCode = oProcess.waitFor();
+            if (exitCode == 0) {
+                System.out.println("compiled successfully");
+            }
+            else {
+            	System.out.println("3 compile error occurred –"+Filename +".error ");
+            }
 			
 			
 		} catch (IOException e) {
