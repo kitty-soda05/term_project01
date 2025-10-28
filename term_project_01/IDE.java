@@ -17,12 +17,12 @@ public class IDE {
 
     public void Menu() {
         System.out.println("#######################");
-        System.out.println("1. 자바 파일 업로드");
-        System.out.println("2. 컴파일");
-        System.out.println("3. 런");
-        System.out.println("4. 파일 삭제");
-        System.out.println("5. 컴파일 오류 파일");
-        System.out.println("6. 프로그램 종료");
+        System.out.println("1. Java File Upload");
+        System.out.println("2. Compile");
+        System.out.println("3. Run");
+        System.out.println("4. Reset");
+        System.out.println("5. Compile Error File");
+        System.out.println("6. Exit");
         System.out.print("Choice : ");
     }
 
@@ -76,7 +76,7 @@ public class IDE {
                 }
                 case 5: {
                     System.out.println("#######################");
-                    if (Filename == null || !isCompile) {
+                    if (Filename == null && isCompile) {
                         System.out.println("컴파일 에러 파일 없음.");
                     } else {
                         Error_File();
@@ -104,7 +104,7 @@ public class IDE {
         try {
             // cd하고 && javac사이에 있는 건 파일 경로
             ProcessBuilder t = new ProcessBuilder("cmd", "/c",
-                    "cd C:\\\\term_project_01\\\\Expolor && javac " + Filename);
+                    "cd C:\\term_project_01\\Expolor && javac " + Filename);
             Process oProcess = t.start();
 
             BufferedReader stdOut = new BufferedReader(new InputStreamReader(oProcess.getInputStream()));
@@ -122,6 +122,7 @@ public class IDE {
 
             if (!isiterror) {
                 System.out.println("compiled successfully");
+                isCompile = true;
             } else {
                 System.out.println("3 compile error occurred –" + Filename + ".error ");
             }
@@ -138,7 +139,7 @@ public class IDE {
 
             // cd하고 && javac사이에 있는 건 파일 경로
             ProcessBuilder t = new ProcessBuilder("cmd", "/c",
-                    "cd C:\\\\term_project_01\\\\Expolor && java " + Filename);
+                    "cd C:\\term_project_01\\Expolor && java " + Filename);
             Process process = t.start();
 
             BufferedReader stdOut = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -152,8 +153,6 @@ public class IDE {
             }
 
             System.out.println("Exit Code: " + process.exitValue());
-            System.exit(process.exitValue());
-
         } catch (Exception e) {
             // TODO: handle exception
             System.err.println("에러! 파일 실행 실패\n" + e.getMessage());
